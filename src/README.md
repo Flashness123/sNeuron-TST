@@ -92,6 +92,8 @@ If you have any questions about our paper, please feel convenient to let me know
 #### Activation
 - python src/activation.py -m meta-llama/Llama-2-7b-hf -s original -d data/Hate_Speech/preprocessed
 - python activation.py -m meta-llama/Llama-2-7b-hf -s converted -d data/Hate_Speech/preprocessed
+
+-s Name has to match Columns
 #### Identify
 - python src/identify.py -t 10000 -ap data/Hate_Speech/preprocessed -o data/Hate_Speech/neurons
 #### Intersection
@@ -100,3 +102,22 @@ If you have any questions about our paper, please feel convenient to let me know
 - python src/Our/run_gen_dola.py -p src/Our/dola.py -a data/Hate_Speech/neurons -d data/Hate_Speech/dataset -o data/Hate_Speech/generated -t 5
 #### Evaluation
 - None so far
+
+
+
+
+
+SLurm:
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --mem=24G
+#SBATCH --gres=gpu:1
+#SBATCH --time=01:00:00
+#SBATCH --mail-type=begin,end,fail
+#SBATCH --mail-user=luko113g@mailbox.tu-dresden.de
+#SBATCH --account=p_scads_llm_secrets
+
+source $HOME/venv/scadsai/bin/activate
+python $HOME/lk_scadsai/sNeuron-TST/src/activation.py -m meta-llama/Llama-2-7b-hf -s original -d data/Hate_Speech/preprocessed
+
+

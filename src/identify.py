@@ -14,7 +14,7 @@ def main(args):
         # 'Politness': ['polite', 'impolite'],
         # 'Shakespeare': ['shakespeare', 'modern'],
         # 'Yelp': ['positive', 'negative'],
-        'Hate_Speech': ['Original Text', 'Converted Text']
+        'Hate_Speech': ['original', 'converted']
 
     }
     
@@ -33,9 +33,15 @@ def main(args):
         negative_style = style_dict[style][1]
         
         ## activation
-        positive_activation = torch.load(f"{args.activation_path}/activation.{style}.{positive_style}.train.llama-7b")
-        negative_activation = torch.load(f"{args.activation_path}/activation.{style}.{negative_style}.train.llama-7b")
+        #positive_activation = torch.load(f"{args.activation_path}/activation.{style}.{positive_style}.train.llama-7b")
+        positive_activation = torch.load(f"{args.activation_path}/activation.{positive_style}.train.llama-7b")
+
         
+        #negative_activation = torch.load(f"{args.activation_path}/activation.{style}.{negative_style}.train.llama-7b")
+        
+        negative_activation = torch.load(f"{args.activation_path}/activation.{negative_style}.train.llama-7b")
+
+
         num_layers, intermediate_size = positive_activation['over_zero'].size()
         
         ## 1. positive neurons

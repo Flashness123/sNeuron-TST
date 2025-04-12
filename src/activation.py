@@ -12,8 +12,8 @@ parser.add_argument("-d", "--data_path", type=str, default="")
 args = parser.parse_args()
 
 is_llama = bool(args.model.lower().find('llama') >= 0)
-model = LLM(model=args.model, tensor_parallel_size=torch.cuda.device_count(), enforce_eager=True)
-
+#model = LLM(model=args.model, tensor_parallel_size=torch.cuda.device_count(), enforce_eager=True)
+model = LLM(model=args.model, tensor_parallel_size=1, enforce_eager=True)
 max_length = model.llm_engine.model_config.max_model_len
 num_layers = model.llm_engine.model_config.hf_config.num_hidden_layers
 intermediate_size = model.llm_engine.model_config.hf_config.intermediate_size if is_llama else model.llm_engine.model_config.hf_config.hidden_size * 4
@@ -59,8 +59,10 @@ def factory(idx):
 for i in range(num_layers):
     if is_llama:
         obj = model.llm_engine.driver_worker.model_runner.model.model.layers[i].mlp
+        #obj = model.llm_engine.model.layers[i].mlp
     else:
         obj = model.llm_engine.driver_worker.model_runner.model.transformer.h[i].mlp
+        #obj = model.llm_engine.model.transformer.h[i].mlp
     obj.forward = MethodType(factory(i), obj)
 
 style = args.style
