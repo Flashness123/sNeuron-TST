@@ -1,5 +1,6 @@
 import argparse
 import torch
+import os
 
 
 def main(args):
@@ -13,13 +14,13 @@ def main(args):
         # 'Politness': ['polite', 'impolite'],
         # 'Shakespeare': ['shakespeare', 'modern'],
         # 'Yelp': ['positive', 'negative'],
-        'Hate_Speech': ['Original Text', 'Converted Text']
+        'Hate_Speech': ['original', 'converted']
 
     }
     
     for style in style_list:
         print(f'process {style}')
-        neurons = torch.load(args.data_path + f'/{style}.llama-8b')
+        neurons = torch.load(args.data_path + f'/{style}.llama-7b')
         positive_neurons = neurons[0]
         negative_neurons = neurons[1]
                 
@@ -46,14 +47,18 @@ def main(args):
             
         
         ## 写文件
+        inter_dir = os.path.join(args.data_path, 'inter_neurons')
+        non_inter_dir = os.path.join(args.data_path, 'non_inter_neurons')
+        os.makedirs(inter_dir, exist_ok=True)
+        os.makedirs(non_inter_dir, exist_ok=True)
         
-        torch.save(final_inter_tensor, args.data_path + f"/inter_neurons/{style}.inter_neurons.llama-8b")
-        torch.save(pos_non_inter_tensor, args.data_path + f"/non_inter_neurons/{style}.{style_dict[style][0]}.llama-8b")
-        torch.save(neg_non_inter_tensor, args.data_path + f"/non_inter_neurons/{style}.{style_dict[style][1]}.llama-8b")
+        torch.save(final_inter_tensor, args.data_path + f"/inter_neurons/{style}.inter_neurons.llama-7b")
+        torch.save(pos_non_inter_tensor, args.data_path + f"/non_inter_neurons/{style}.{style_dict[style][0]}.llama-7b")
+        torch.save(neg_non_inter_tensor, args.data_path + f"/non_inter_neurons/{style}.{style_dict[style][1]}.llama-7b")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--data_path", type=str, default="")
+    parser.add_argument("-d", "--data_path", type=str, default="data/Hate_Speech/neurons")
     args = parser.parse_args()
     main(args)

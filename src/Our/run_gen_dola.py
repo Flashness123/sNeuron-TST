@@ -15,9 +15,10 @@ def main(args):
         # 'Politness': ['polite', 'impolite'],
         # 'Shakespeare': ['shakespeare', 'modern'],
         # 'Yelp': ['positive', 'negative'],
-        'Hate_Speech': ['Original Text', 'Converted Text']
+        'Hate_Speech': ['original', 'converted']
 
     }
+    os.makedirs(args.out_path, exist_ok=True)
 
     for style in style_list:
         for style_name in style_dict[style]:
@@ -42,11 +43,11 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-p", "--python_file", type=str, default="")
+    parser.add_argument("-p", "--python_file", type=str, default="src/Our/dola.py")
     parser.add_argument("-m", "--model", type=str, default="meta-llama/Llama-2-7b-hf")
-    parser.add_argument("-a", "--activation_path", type=str, default="")
-    parser.add_argument("-d", "--data_path", type=str, default="")
-    parser.add_argument("-o", "--out_path", type=str, default="")
+    parser.add_argument("-a", "--activation_path", type=str, default="data/Hate_Speech/preprocessed")
+    parser.add_argument("-d", "--data_path", type=str, default="data/Hate_Speech/neurons")
+    parser.add_argument("-o", "--out_path", type=str, default="data/Hate_Speech/outputs")
     parser.add_argument("-t", "--threshold", type=str, default="5")
     args = parser.parse_args()
     main(args)

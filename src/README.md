@@ -97,9 +97,9 @@ If you have any questions about our paper, please feel convenient to let me know
 #### Identify
 - python src/identify.py -t 10000 -ap data/Hate_Speech/preprocessed -o data/Hate_Speech/neurons
 #### Intersection
-- python src/Analysis/select_neurons.py
+- python src/Analysis/select_neurons.py -d data/Hate_Speech/neurons
 #### Generate
-- python src/Our/run_gen_dola.py -p src/Our/dola.py -a data/Hate_Speech/neurons -d data/Hate_Speech/dataset -o data/Hate_Speech/generated -t 5
+- python src/Our/run_gen_dola.py
 #### Evaluation
 - None so far
 
