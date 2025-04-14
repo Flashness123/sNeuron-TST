@@ -8,4 +8,4 @@
 #SBATCH --account=p_scads_llm_secrets
 
 source $HOME/venv/scadsai/bin/activate
-python "$HOME/lk_scadsai/sNeuron-TST/src/identify.py" -t 10000 -ap "$HOME/lk_scadsai/sNeuron-TST/data/Hate_Speech/preprocessed" -o "$HOME/lk_scadsai/sNeuron-TST/data/Hate_Speech/neurons"
+python "$HOME/lk_scadsai/sNeuron-TST/src/Our/run_gen_dola.py"

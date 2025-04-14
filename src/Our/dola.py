@@ -81,9 +81,10 @@ class DoLa:
         else:
             raise ValueError(f"Invalid device: {self.device}")
         
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
+        tokenizer = AutoTokenizer.from_pretrained(model_name, token="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")
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
+            token="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",
             low_cpu_mem_usage=True,
             **kwargs
         )
@@ -107,7 +108,9 @@ class DoLa:
         with torch.no_grad():
             input_ids = self.tokenizer(input_text, return_tensors="pt").input_ids.to(self.device)
             max_len = input_ids.shape[-1] + max_new_tokens
-
+            if mode not in ['baseline', 'dola-static', 'dola']:
+                print(f"Warning: Mode '{mode}' not recognized. Falling back to 'baseline'.")
+                mode = 'baseline'
             if mode == 'baseline':
                 outputs = self.model.generate(
                     input_ids,
@@ -115,7 +118,7 @@ class DoLa:
                     num_return_sequences=1,
                     output_scores=True,
                     return_dict_in_generate=True,
-                    dola_decoding=False,
+                    #dola_decoding=False,
                     top_p=top_p,
                     top_k=top_k,
                     temperature=temperature,
@@ -281,6 +284,6 @@ if __name__ == "__main__":
 
     dola = DoLa(model_name=args.model, device="cuda", num_gpus=1)
     dola.set_stop_words(["Q:"])  # Example stop word
-    input_text = "Hello, how are you?"
+    input_text = "I dont like these fucking mexiacans, cant they get rid of this umbrella hat? Reall morrons to me."
     output, _ = dola.generate(input_text, mode=args.style or "baseline")
     print(f"Generated output: {output}")
