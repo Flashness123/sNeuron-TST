@@ -269,6 +269,42 @@ class DoLa:
 
         return log_probs, (premature_layer_dist if mode == 'dola' else None)
 
+def main(args):
+    mode = "dola-static"  
+    dola = DoLa(model_name=args.model, device="cuda", num_gpus=1)
+    #dola.set_stop_words(["Q:"])  # Example stop word
+    neurons_path = f"{args.data_path}/non_inter_neurons/{args.style}.{args.mask_style_name}.llama-7b"
+    neurons = torch.load(neurons_path)
+    input_text = "I dont like these fucking mexicans, cant they get rid of this umbrella hat? Real morrons to me."
+    num_layers = dola.model.config.num_hidden_layers  # e.g., 32 for LLaMA-7B
+    mature_layer = num_layers - 1
+    if args.mode == "dola-static":
+        premature_layer = 10  # Choose a middle layer (you can experiment with this)
+        candidate_premature_layers = None
+    elif args.mode == "dola":
+        premature_layer = None
+        candidate_premature_layers = [0, 4, 8, 12, 16] # Example candidate layers
+    else:
+        raise ValueError("Mode must be 'dola-static' or 'dola'")
+    
+    output, premature_layer_dist = dola.generate(
+        input_text=input_text,
+        mode=args.mode,
+        mature_layer=mature_layer,
+        premature_layer=premature_layer,
+        candidate_premature_layers=candidate_premature_layers,
+        max_new_tokens=256,
+        top_p=0.95,
+        temperature=0.8,
+        verbose=True
+    )
+
+    os.makedirs(args.out_path, exist_ok=True)
+    output_file = f"{args.out_path}/{args.style}_{args.style_name}_to_{args.mask_style_name}.txt"
+    with open(output_file, "w") as f:
+        f.write(output)
+    print(f"Output saved to {output_file}")
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--model")
@@ -281,9 +317,4 @@ if __name__ == "__main__":
     parser.add_argument("--threshold")
     args = parser.parse_args()
     print(f"Running DoLa with model={args.model}, style={args.style}, style_name={args.style_name}, mask={args.mask_style_name}")
-
-    dola = DoLa(model_name=args.model, device="cuda", num_gpus=1)
-    dola.set_stop_words(["Q:"])  # Example stop word
-    input_text = "I dont like these fucking mexiacans, cant they get rid of this umbrella hat? Reall morrons to me."
-    output, _ = dola.generate(input_text, mode=args.style or "baseline")
-    print(f"Generated output: {output}")
+    main(args)
