@@ -1,46 +1,0 @@
-/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/io/image.py:14: UserWarning: Failed to load image Python extension: '/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSsb'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
-  warn(
-Running DoLa with model=meta-llama/Llama-2-7b-hf, style=Hate_Speech, style_name=original, mask=converted
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 18.33it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 18.30it/s]
-Added stop word:  Q: with the ids [29984, 29901]
-Warning: Mode 'Hate_Speech' not recognized. Falling back to 'baseline'.
-MODEL OUTPUT: 
-I hope you are having a wonderful week.
-Today, I will be writing about the latest products I have used.
-L'Oreal Voluminous Butterfly Mascara.
-Before I get into the details of the mascara, I just want to share my views on it.
-The L'Oreal Voluminous Butterfly Mascara is a volume mascara. It has a butterfly brush which is a rather unique shape. Unlike conventional brushes, the butterfly brush has a hook shaped tip which will help to enhance volume and length of the lashes.
-The mascara is a butterfly theme so it comes with 2 shades, the yellow and the blue.
-The yellow one is the one I am using.
-I find that this mascara really works to give volume and length to the lashes. It also helps to create a winged lash look. However, I find that the brush is too soft to do the job. Sometimes, I find that it is difficult to separate the lashes from the brush and get it done. I also find that the brush may not be suitable for
-Generated output: I hope you are having a wonderful week.
-Today, I will be writing about the latest products I have used.
-L'Oreal Voluminous Butterfly Mascara.
-Before I get into the details of the mascara, I just want to share my views on it.
-The L'Oreal Voluminous Butterfly Mascara is a volume mascara. It has a butterfly brush which is a rather unique shape. Unlike conventional brushes, the butterfly brush has a hook shaped tip which will help to enhance volume and length of the lashes.
-The mascara is a butterfly theme so it comes with 2 shades, the yellow and the blue.
-The yellow one is the one I am using.
-I find that this mascara really works to give volume and length to the lashes. It also helps to create a winged lash look. However, I find that the brush is too soft to do the job. Sometimes, I find that it is difficult to separate the lashes from the brush and get it done. I also find that the brush may not be suitable for
-/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/io/image.py:14: UserWarning: Failed to load image Python extension: '/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSsb'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
-  warn(
-Running DoLa with model=meta-llama/Llama-2-7b-hf, style=Hate_Speech, style_name=converted, mask=original
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 23.78it/s]
-Added stop word:  Q: with the ids [29984, 29901]
-Warning: Mode 'Hate_Speech' not recognized. Falling back to 'baseline'.
-MODEL OUTPUT: 
-Yes, I'm doing well.
-And yes, I'm still playing this game. And yes, I'm still liking it. And yes, I'm still trying to find time to play it.
-I took the time to play a few more missions. I finished the ones that I started a few months ago. I did not finish all of them, but I did finish the main storyline.
-I also unlocked three more missions, though I did not complete them. They were all the little side missions that you can do after you finish a main mission.
-I did the most of these missions on my first run through of the game, but I decided to do them again on my second run through. I can't tell if they are easier, but I can tell that I like them. I like the fact that I have a choice to make at the end of the missions. I can either pick the bad guy and get the easy reward, or I can pick the good guy and get a more difficult reward. I always choose the good guy, and I always choose the difficult reward.
-The game has really grown on me. I'm not sure if I would be
-Generated output: Yes, I'm doing well.
-And yes, I'm still playing this game. And yes, I'm still liking it. And yes, I'm still trying to find time to play it.
-I took the time to play a few more missions. I finished the ones that I started a few months ago. I did not finish all of them, but I did finish the main storyline.
-I also unlocked three more missions, though I did not complete them. They were all the little side missions that you can do after you finish a main mission.
-I did the most of these missions on my first run through of the game, but I decided to do them again on my second run through. I can't tell if they are easier, but I can tell that I like them. I like the fact that I have a choice to make at the end of the missions. I can either pick the bad guy and get the easy reward, or I can pick the good guy and get a more difficult reward. I always choose the good guy, and I always choose the difficult reward.
-The game has really grown on me. I'm not sure if I would be
-process Hate_Speech in original when mask converted
-Running Command: python src/Our/dola.py -m meta-llama/Llama-2-7b-hf -a data/Hate_Speech/preprocessed -d data/Hate_Speech/neurons -o data/Hate_Speech/outputs --style Hate_Speech --style_name original --mask_style_name converted --threshold 5
-process Hate_Speech in converted when mask original
-Running Command: python src/Our/dola.py -m meta-llama/Llama-2-7b-hf -a data/Hate_Speech/preprocessed -d data/Hate_Speech/neurons -o data/Hate_Speech/outputs --style Hate_Speech --style_name converted --mask_style_name original --threshold 5

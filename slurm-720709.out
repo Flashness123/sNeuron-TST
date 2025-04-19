@@ -1,0 +1,27 @@
+/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/io/image.py:14: UserWarning: Failed to load image Python extension: '/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSsb'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+Running DoLa with model=meta-llama/Llama-2-7b-hf, style=Hate_Speech, style_name=original, mask=converted
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 19.94it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 19.86it/s]
+Added stop word:  None with the ids [8516]
+MODEL OUTPUT: 
+
+I saw a guy in a chicken hat.
+I saw a guy in a chicken hat. So I ran over and grabbed it.
+So I ran over and grabbed it.
+So I ran over
+Output saved to data/Hate_Speech/outputs/Hate_Speech_original_to_converted.txt
+/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/io/image.py:14: UserWarning: Failed to load image Python extension: '/home/h8/luko113g/venv/scadsai/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN5torch3jit17parseSchemaOrNameERKSsb'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+Running DoLa with model=meta-llama/Llama-2-7b-hf, style=Hate_Speech, style_name=converted, mask=original
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 22.44it/s]
+Added stop word:  None with the ids [8516]
+MODEL OUTPUT: 
+
+I think this is a pretty good avatar of the situation in California.
+I've been there a few times. Its like a third world country, just with better weather.
+Ive been in a few places in California and I
+Output saved to data/Hate_Speech/outputs/Hate_Speech_converted_to_original.txt
+process Hate_Speech in original when mask converted
+Running Command: python src/Our/dola.py -m meta-llama/Llama-2-7b-hf -a data/Hate_Speech/preprocessed -d data/Hate_Speech/neurons -o data/Hate_Speech/outputs --style Hate_Speech --style_name original --mask_style_name converted --threshold 5
+process Hate_Speech in converted when mask original
+Running Command: python src/Our/dola.py -m meta-llama/Llama-2-7b-hf -a data/Hate_Speech/preprocessed -d data/Hate_Speech/neurons -o data/Hate_Speech/outputs --style Hate_Speech --style_name converted --mask_style_name original --threshold 5
