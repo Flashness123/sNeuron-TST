@@ -14,7 +14,7 @@ def main(args):
     test_converted_file = open(os.path.join(args.out_path, 'test.converted.txt'), 'w', encoding='utf-8')
 
     # Load your private Hugging Face dataset
-    total_dataset = load_dataset(args.data_hf, split="train", token="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")
+    total_dataset = load_dataset(args.data_hf, split="train", token=os.environ.get("HF_TOKEN"))
 
     # Split into train (95%) and test (5%)
     split_dataset = total_dataset.train_test_split(test_size=0.05)

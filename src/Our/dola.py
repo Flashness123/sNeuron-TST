@@ -81,10 +81,10 @@ class DoLa:
         else:
             raise ValueError(f"Invalid device: {self.device}")
         
-        tokenizer = AutoTokenizer.from_pretrained(model_name, token="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")
+        tokenizer = AutoTokenizer.from_pretrained(model_name, token=os.environ.get("HF_TOKEN"))
         model = AutoModelForCausalLM.from_pretrained(
             model_name,
-            token="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",
+            token=os.environ.get("HF_TOKEN"),
             low_cpu_mem_usage=True,
             **kwargs
         )
